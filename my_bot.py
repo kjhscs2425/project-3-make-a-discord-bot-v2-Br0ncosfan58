@@ -7,8 +7,9 @@ This function will be called every time anyone says anything on a channel where 
 * You can have certain words or patterns in the messages trigger the bot.
 * You can have the bot respond differently to different users
 """
+
 def should_i_respond(user_message, user_name):
-  if "robot" in user_message:
+  if "robot" in user_message or "sports score" in user_message or "joke" in user_message:
     return True
   else:
     return False
@@ -22,6 +23,14 @@ This function will be called every time the `should_i_respond` function returns 
 * The bot will post the returned string on the channel where the original message was sent.
 * You can have the bot respond differently to different messages and users
 """
+import random
+
 def respond(user_message, user_name):
-  return f"""you said my name!!
-  {user_message.replace("robot", user_name)}"""
+  jokes = ["What's the best thing about Switzerland? The flag is a big plus", "I had a joke about paper today, but it was tearable.", "Why did the crab cross the road? It didnt—it used the sidewalk.", ]
+  if "robot" in user_message:
+    return f"""you said my name!!
+      {user_message.replace("robot", user_name)}"""
+  elif "sports score" in user_message:
+    return "To find sports scores look at https://www.espn.com"
+  elif "joke" in user_message:
+    return random.choice(jokes)
