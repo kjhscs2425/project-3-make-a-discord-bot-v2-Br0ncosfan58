@@ -25,6 +25,14 @@ def should_i_respond(user_message, user_name):
     return True
   elif "fun fact" in user_message:
     return True
+  elif "day" in user_message:
+    return True
+  elif "todays date" or "date" in user_message:
+    return True
+  elif "time" in user_message:
+    return True
+  elif "math" in user_message:
+    return True
   else:
     return False
 
@@ -38,6 +46,7 @@ This function will be called every time the `should_i_respond` function returns 
 * You can have the bot respond differently to different messages and users
 """
 import random
+import datetime
 
 def respond(user_message, user_name):
   jokes = ["What's the best thing about Switzerland? The flag is a big plus", "I had a joke about paper today, but it was tearable.", "Why did the crab cross the road? It didnt—it used the sidewalk."]
@@ -113,5 +122,41 @@ def respond(user_message, user_name):
     return random.choice(lyrics)
   elif "fun fact" in user_message:
     return random.choice(fun_fact)
+  elif "day" in user_message:
+    x = datetime.datetime.now()
+    print(x.strftime("%A"))
+    return f"""Today is
+    {x.strftime("%A")}"""
+  elif "todays date" or "date" in user_message:
+    x = datetime.datetime.now()
+    print(x.strftime("%x"))
+    return f"""Todays date is 
+    {x.strftime("%x")}"""
+  elif "math" in user_message:
+        problem = user_message.replace("math")
+        answer = eval(problem)
+        return f"The answer to {problem} is {answer}."
+  elif "time" in user_message:
+    x = datetime.datetime.now()
+    print(x.strftime("%X"))
+    return f"""It is
+    {x.strftime("%X")}"""
+  elif "rock paper scissors" in user_message:
+    user_choice = user_message.replace("rock paper scissors")
+    bot_choice = random.choice(rps)
+    if user_choice == bot_choice:
+      result = "It's a tie!" 
+    elif (user_choice == "rock" and bot_choice == "scissors") or \
+            (user_choice == "paper" and bot_choice == "rock") or \
+             (user_choice == "scissors" and bot_choice == "paper"):
+      result = "You win!"
+    else:
+      result = "I win!"
+    return f"You chose {user_choice}. I chose {bot_choice}. {result}"
+   
+
+
+  
+  
 
 

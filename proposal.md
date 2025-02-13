@@ -4,7 +4,7 @@ When a user says: tell me a sports score
 My bot will respond by: tell the user to go look up scores at espn.com
 
 When a user says: tell me a joke 
-My bot will respond by: tell the user a random joke
+My bot will respond by: tell the user a random joke 
 
 When a user says: what is todays date?
 My bot will respond by: telling you what the date is
