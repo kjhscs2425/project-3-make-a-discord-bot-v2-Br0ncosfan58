@@ -27,7 +27,7 @@ def should_i_respond(user_message, user_name):
     return True
   elif "day" in user_message:
     return True
-  elif "todays date" or "date" in user_message:
+  elif "date" in user_message:
     return True
   elif "time" in user_message:
     return True
@@ -49,8 +49,8 @@ import random
 import datetime
 
 def respond(user_message, user_name):
+  choices = ["rock", "paper", "scissors"]
   jokes = ["What's the best thing about Switzerland? The flag is a big plus", "I had a joke about paper today, but it was tearable.", "Why did the crab cross the road? It didnt—it used the sidewalk."]
-  rps = ["rock", "paper", "scissors"]
   fun_fact = ["Australia is wider than the moon: Australia is almost 4,000 km wide from east to west, while the moon is 3,400 km in diameter.", "Avocados are fruits: Avocados are biologically fruits, even though they are often prepared and eaten like vegetables.", "Flamingos aren't born pink: Flamingos are not born pink." , "Ketchup was once medicine", "The heart of a blue whale is huge: A blue whale's heart weighs about 400 pounds and can be heard beating from two miles away.", "Trees can communicate: Trees can communicate with each other.","Dolphins have names for each other: Dolphins have names for each other.", "Bamboo is the fastest growing plant: Bamboo is the world's fastest growing plant.", "Sharks don't have bones: Sharks don't have any bones."]
   lyrics = [ 
     "I get a feeling that I never never never never had before, no no",
@@ -112,6 +112,10 @@ def respond(user_message, user_name):
   if "robot" in user_message:
     return f"""you said my name!!
       {user_message.replace("robot", user_name)}"""
+  elif "math" in user_message:
+    waiting_for_math[user_id] = True
+    return "What math problem would you like me to solve?"
+  
   elif "sports score" in user_message:
     return "To find sports scores look at https://www.espn.com"
   elif "birthday" in user_message:
@@ -125,34 +129,35 @@ def respond(user_message, user_name):
   elif "day" in user_message:
     x = datetime.datetime.now()
     print(x.strftime("%A"))
-    return f"""Today is
-    {x.strftime("%A")}"""
-  elif "todays date" or "date" in user_message:
+    return f"""Today is {x.strftime("%A")}"""
+  elif "date" in user_message:
     x = datetime.datetime.now()
     print(x.strftime("%x"))
-    return f"""Todays date is 
-    {x.strftime("%x")}"""
+    return f"""Todays date is {x.strftime("%x")}"""
+  elif "time" in user_message:
+    x = datetime.datetime.now()
+    print(x.strftime("%X"))
+    return f"""It is {x.strftime("%X")}"""
   elif "math" in user_message:
         problem = user_message.replace("math")
         answer = eval(problem)
         return f"The answer to {problem} is {answer}."
-  elif "time" in user_message:
-    x = datetime.datetime.now()
-    print(x.strftime("%X"))
-    return f"""It is
-    {x.strftime("%X")}"""
   elif "rock paper scissors" in user_message:
-    user_choice = user_message.replace("rock paper scissors")
-    bot_choice = random.choice(rps)
+    return "Please choose rock, paper, or scissors"
+  if "rock" in user_message or "paper" in user_message or "scissors" in user_message: 
+    bot_choice = random.choice(choices)
     if user_choice == bot_choice:
-      result = "It's a tie!" 
+      result = "It's a tie!"
     elif (user_choice == "rock" and bot_choice == "scissors") or \
-            (user_choice == "paper" and bot_choice == "rock") or \
-             (user_choice == "scissors" and bot_choice == "paper"):
+    (user_choice == "paper" and bot_choice == "rock") or \
+      (user_choice == "scissors" and bot_choice == "paper"):
       result = "You win!"
-    else:
-      result = "I win!"
-    return f"You chose {user_choice}. I chose {bot_choice}. {result}"
+  else:
+     return "I win!!"
+      
+  return f"You chose {user_choice}, I chose {bot_choice}. {result}"
+      
+
    
 
 
